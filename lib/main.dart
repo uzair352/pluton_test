@@ -10,14 +10,15 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   runApp(
-    DevicePreview(
-      enabled: true,
-      tools: [
-        ...DevicePreview.defaultTools,
+    // DevicePreview(
+    //   enabled: true,
+    //   tools: [
+    //     ...DevicePreview.defaultTools,
       
-      ],
-      builder: (context) => const MyApp(),
-    ),
+    //   ],
+    //   builder: (context) => const MyApp(),
+    // ),
+    const MyApp()
      );
 }
 
