@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pluton_test/provider/home_provider.dart';
 import 'package:pluton_test/widget/cardlist.dart';
 import 'package:pluton_test/widget/column_scrollview.dart';
 import 'package:pluton_test/widget/main_drawer_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,43 +14,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Map<String, dynamic>> cardliist = [
-    {
-      "id": "1",
-      "label": "Listed by",
-      "rlabel": "George Fahmy",
-      "tlabel": "25 min",
-      "title": "Luxury Villa",
-      "subtitle":
-          "Lorem ipsum dolor sit amet, cosectetuer adipscing elit sed diam nonummy nibh euismod tinncidunt ut laoreet dolor magna aliquam eratvolutpat",
-      "mainImg": "assets/images/luxury.jpg",
-      "circleImg": "assets/images/square.jpg",
-      "color": Color.fromRGBO(72, 189, 151, 1),
-    },
-    {
-      "id": "2",
-      "label": "Listed by",
-      "rlabel": "George Fahmy",
-      "tlabel": "25 min",
-      "title": "Luxury Villa",
-      "subtitle":
-          "Lorem ipsum dolor sit amet, cosectetuer adipscing elit sed diam nonummy nibh euismod tinncidunt ut laoreet dolor magna aliquam eratvolutpat",
-      "mainImg": "assets/images/luxury.jpg",
-      "circleImg": "assets/images/square.jpg",
-      "color": Color.fromRGBO(242, 127, 178, 1),
-    }
-  ];
-  String tagId = ' ';
-  void active(
-    dynamic val,
-  ) {
-    setState(() {
-      tagId = val;
-    });
-  }
-
+  
   @override
   Widget build(BuildContext context) {
+    final cardData = Provider.of<HomProvider>(context);
+    final data = cardData.card;
     return Scaffold(
       drawer: MainDrawerWidget(),
       appBar: AppBar(
@@ -111,13 +81,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: cardliist.length,
+                    itemCount: cardData.card.length,
                     itemBuilder: (ctx, i) {
                       return CardList(
-                        data: cardliist[i],
-                        action: active,
-                        tagid: cardliist[i]['id'],
-                        active: tagId == cardliist[i]['id'] ? false : true,
+                        data: cardData.card[i],
+                      
                       );
                     })
               ],

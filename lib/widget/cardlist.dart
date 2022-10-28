@@ -3,15 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CardList extends StatefulWidget {
   final data;
-  bool? active;
-  ValueChanged<String>? action;
-  String? tagid;
+ 
   CardList({
     Key? key,
-    this.action,
-    this.active,
+   
     this.data,
-    this.tagid,
+    
   }) : super(key: key);
 
   @override
@@ -36,7 +33,7 @@ class _CardListState extends State<CardList> {
           ClipRRect(
             borderRadius: BorderRadius.circular(25.h),
             child: Image(
-              image: AssetImage(widget.data['mainImg']),
+              image: AssetImage(widget.data.mainImg),
               fit: BoxFit.fill,
               height: 330.h,
             ),
@@ -61,7 +58,7 @@ class _CardListState extends State<CardList> {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage(widget.data['circleImg']),
+                        backgroundImage: AssetImage(widget.data.circleImg),
                       ),
                       SizedBox(
                         width: 10.w,
@@ -73,20 +70,20 @@ class _CardListState extends State<CardList> {
                           Row(
                             children:  [
                               Text(
-                                "${widget.data['label']} ",
+                                "${widget.data.label} ",
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w300),
                               ),
                               Text(
-                                widget.data['rlabel'],
+                                widget.data.rlabel,
                                 style: TextStyle(color: Colors.white),
                               )
                             ],
                           ),
                           SizedBox(height: 2.h,),
                           Text(
-                            widget.data['tlabel'],
+                            widget.data.tlabel,
                             style:  TextStyle(color: Colors.white, fontSize: 10.sp),
                           )
                         ],
@@ -109,7 +106,7 @@ class _CardListState extends State<CardList> {
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(5),
                         bottomRight: Radius.circular(5)),
-                    color: widget.data['color']),
+                    color: widget.data.color),
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Row(
@@ -259,7 +256,7 @@ class _CardListState extends State<CardList> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.data['title'],
+                  widget.data.title,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 14.sp,
@@ -267,7 +264,7 @@ class _CardListState extends State<CardList> {
                 ),
                 Container(
                   width: 320,
-                  child: Text(widget.data['subtitle'],
+                  child: Text(widget.data.subtitle,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12.sp,

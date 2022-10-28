@@ -1,10 +1,12 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pluton_test/provider/home_provider.dart';
 import 'package:pluton_test/screen/splash_screen.dart';
 import 'package:pluton_test/services/navigation_service.dart';
 import 'package:pluton_test/utils/route.dart';
 import 'package:pluton_test/utils/service_locator.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,16 +33,21 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: Size(360, 690),
         builder: ((context, child) {
-          return MaterialApp(
-            title: 'Flutter Demo',
-            navigatorKey: locator<NavigationService>().navigatorKey,
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider.value(value: HomProvider())
+            ],
+            child: MaterialApp(
+              title: 'Flutter Demo',
+              navigatorKey: locator<NavigationService>().navigatorKey,
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              // home: SplashScreen(),
+              onGenerateRoute: onGenerateRoute,
+              initialRoute: SplashScreenRoute,
             ),
-            // home: SplashScreen(),
-            onGenerateRoute: onGenerateRoute,
-            initialRoute: SplashScreenRoute,
           );
         }));
   }
